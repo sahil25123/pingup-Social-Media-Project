@@ -7,7 +7,7 @@ const Notification = ({t, message}) => {
     const navigate = useNavigate();
 
   return (
-    <div className={`max-w-md w-full bg-white shadow-lg rounded-lg flex border border-gray-300 hover:scale-105 transition`}>
+    <div className={`max-w-md w-full bg-white shadow-lg rounded-xl flex border border-slate-200 hover:scale-[1.02] transition`}>
         <div className='flex-1 p-4'>
             <div className='flex items-start'>
                 <img src={message.from_user_id.profile_picture} className='size-10 rounded-full flex-shrink-0 mt-0.5' alt="" />
@@ -17,11 +17,11 @@ const Notification = ({t, message}) => {
                 </div>
             </div>
         </div>
-        <div className='flex border-l border-gray-200'>
+        <div className='flex border-l border-slate-200'>
             <button onClick={()=>{
                 navigate(`/messages/${message.from_user_id._id}`);
                 toast.dismiss(t.id);
-            }} className='p-4 text-indigo-600 font-semibold'>
+            }} className='p-4 text-teal-600 font-semibold hover:text-teal-700 transition'>
                 Reply
             </button>
         </div>

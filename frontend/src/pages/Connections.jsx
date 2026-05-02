@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { MessageSquare, User, UserCheck, UserPlus, UserRoundPen } from 'lucide-react';
+import { MessageSquare, User, UserCheck, UserPlus, UserRoundPen, SearchCheck } from 'lucide-react';
 import { useAuth } from '@clerk/clerk-react';
 import api from '../api/axios';
 import { fetchConnections } from '../features/connections/connectionSlice.js';
@@ -65,55 +65,66 @@ function Connections() {
     })
   },[])
 
+  const activeUsers = dataArray.find((item)=>item.label === currentTab)?.value || [];
+
   return (
-    <div className='min-h-screen bg-slate-50'>
-      <div className='max-w-6xl mx-auto p-6'>
-        {/* Title */}
-        <div className='mb-8'>
-          <h1 className='text-3xl font-bold text-slate-900 mb-2'>Connections</h1>
-          <p className='text-slate-600'>Manage your network and discover new connections</p>
+    <div className='min-h-screen'>
+      <div className='max-w-7xl mx-auto page-shell space-y-6'>
+        <div>
+          <h1 className='app-title mb-2'>Connections</h1>
+          <p className='app-subtitle'>Manage your network and discover new connections</p>
         </div>
 
-        {/* Counts */}
-        <div className='mb-8 flex flex-wrap gap-6'>
+        <div className='grid grid-cols-2 lg:grid-cols-4 gap-3'>
           {dataArray.map((item, index) => (
-            <div key={index} className='flex flex-col items-center justify-center gap-1 border h-20 w-40 border-gray-200 bg-white shadow rounded-md'>
-              <b>{item.value.length}</b>
-              <p className='text-slate-600 capitalize'>{item.label}</p> 
+            <div key={index} className='section-card px-4 py-4'>
+              <div className='flex items-center justify-between'>
+                <p className='text-slate-600 capitalize text-sm font-medium'>{item.label}</p>
+                <item.icon className='size-4 text-teal-600' />
+              </div>
+              <p className='text-2xl font-bold text-slate-900 mt-2'>{item.value.length}</p>
             </div>
           ))}
         </div>
 
-        {/* Tabs */}
-        <div className='inline-flex flex-wrap items-center border border-gray-200 rounded-md p-1 bg-white shadow-sm'>
-          {dataArray.map((tab) => (
-            <button 
-              onClick={()=>setCurrentTab(tab.label)} 
-              key={tab.label} 
-              className={`cursor-pointer flex items-center px-3 py-1 text-sm rounded-md transition-colors capitalize ${currentTab === tab.label ? "bg-white font-medium text-black" : "text-gray-500 hover:text-black"}`}
-            >
-              <tab.icon className='size-4'/>
-              <span className='ml-1'>{tab.label}</span>
-              {tab.count !== undefined && (
-                <span className='ml-2 text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-full'>{tab.count}</span>
-              )}
-            </button>
-          ))}
+        <div className='section-card p-3 flex flex-col md:flex-row md:items-center justify-between gap-3'>
+          <div className='inline-flex items-center gap-2 text-slate-600 text-sm'>
+            <SearchCheck className='size-4 text-teal-600' />
+            <span>Select a group to manage your network faster.</span>
+          </div>
+
+          <div className='inline-flex flex-wrap items-center subtle-border rounded-xl p-1 bg-white/90 shadow-sm'>
+            {dataArray.map((tab) => (
+              <button 
+                onClick={()=>setCurrentTab(tab.label)} 
+                key={tab.label} 
+                className={`cursor-pointer flex items-center px-3 py-1.5 text-sm rounded-lg transition-colors capitalize ${currentTab === tab.label ? "bg-teal-50 font-semibold text-teal-700" : "text-slate-500 hover:text-slate-900"}`}
+              >
+                <tab.icon className='size-4'/>
+                <span className='ml-1'>{tab.label}</span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Connections */}
-        <div className='flex flex-wrap gap-6 mt-6'>
-          {dataArray.find((item)=>item.label === currentTab)?.value.map((user)=>(
-            <div key={user._id} className='w-full max-w-88 flex gap-5 p-6 bg-white shadow rounded-md'>
-              <img src={user.profile_picture} alt='' className='aspect-square object-cover rounded-full size-12 shadow-md mx-auto'></img>
-              <div className='flex-1'>
-                <p className='font-medium text-slate-700'>{user.full_name}</p>
-                <p className='text-slate-500'>@{user.username}</p>
-                <p className='text-sm text-gray-600'>{user.bio?.slice(0,30)}...</p> 
-                <div className='flex max-ms:flex-col gap-2 mt-4'> 
+        <div className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4'>
+          {activeUsers.length > 0 ? activeUsers.map((user)=>(
+            <div key={user._id} className='section-card p-5 flex items-start gap-4 transition hover:shadow-lg'>
+              {user.profile_picture ? (
+                <img src={user.profile_picture} alt='' className='aspect-square object-cover rounded-full size-13 shadow-sm'></img>
+              ) : (
+                <div className='aspect-square rounded-full size-13 bg-slate-200 flex items-center justify-center shadow-sm'>
+                  <span className='text-slate-500 text-sm font-medium'>{user.full_name?.charAt(0) || 'U'}</span>
+                </div>
+              )}
+              <div className='flex-1 min-w-0'>
+                <p className='font-semibold text-slate-800 truncate'>{user.full_name}</p>
+                <p className='text-slate-500 text-sm truncate'>@{user.username}</p>
+                <p className='text-sm text-slate-600 mt-2 line-clamp-2'>{user.bio ? user.bio : 'No bio available'}</p> 
+                <div className='flex flex-wrap gap-2 mt-4'> 
                   <button 
                     onClick={()=>navigate(`/profile/${user._id}`)} 
-                    className='w-full p-2 text-sm rounded bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 active:scale-95 transition text-white cursor-pointer'
+                    className='flex-1 min-w-30 p-2.5 text-sm rounded-xl btn-primary active:scale-95 transition cursor-pointer'
                   >
                     View Profile
                   </button>
@@ -121,7 +132,7 @@ function Connections() {
                   {currentTab === 'following' && ( 
                     <button  
                       onClick={()=>handleUnfollow(user._id)} 
-                      className='w-full p-2 text-sm rounded bg-slate-100 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer'
+                      className='flex-1 min-w-26 p-2.5 text-sm rounded-xl btn-secondary active:scale-95 transition cursor-pointer'
                     >
                       Unfollow
                     </button>
@@ -130,7 +141,7 @@ function Connections() {
                   {currentTab === 'pending' && ( 
                     <button  
                       onClick={()=>acceptConnection(user._id)} 
-                      className='w-full p-2 text-sm rounded bg-slate-100 hover:bg-slate-200 text-black active:scale-95 transition cursor-pointer'
+                      className='flex-1 min-w-26 p-2.5 text-sm rounded-xl btn-secondary active:scale-95 transition cursor-pointer'
                     >
                       Accept
                     </button>
@@ -139,7 +150,7 @@ function Connections() {
                   {currentTab === 'connections' && ( 
                     <button 
                       onClick={()=>navigate(`/messages/${user._id}`)} 
-                      className='w-full p-2 text-sm rounded bg-slate-100 hover:bg-slate-200 text-slate-800 active:scale-95 transition cursor-pointer flex items-center justify-center gap-1'
+                      className='flex-1 min-w-26 p-2.5 text-sm rounded-xl btn-secondary active:scale-95 transition cursor-pointer flex items-center justify-center gap-1'
                     >
                       <MessageSquare className='size-4'/>
                       Message
@@ -148,7 +159,12 @@ function Connections() {
                 </div>
               </div>
             </div>
-          ))}
+          )) : (
+            <div className='section-card p-10 text-center xl:col-span-2 2xl:col-span-3'>
+              <p className='text-slate-800 font-semibold mb-1 capitalize'>No {currentTab} found</p>
+              <p className='text-slate-500 text-sm'>This section will populate as your network activity grows.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

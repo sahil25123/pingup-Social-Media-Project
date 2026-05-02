@@ -4,7 +4,7 @@ import moment from "moment";
 
 function UserProfileInfo({user, posts, profileId, setShowEdit}) {
   return (
-    <div className='relative py-2 px-6 md:px-8 bg-white'>
+    <div className='relative py-3 px-6 md:px-8 bg-white/70 backdrop-blur-sm'>
       <div className='flex flex-col md:flex-row items-start gap-6'>
         {/* Profile Picture - Fixed positioning and sizing */}
         <div className='w-32 h-32 border-4 border-white shadow-lg -mt-16 rounded-full bg-white relative flex-shrink-0'>
@@ -15,7 +15,7 @@ function UserProfileInfo({user, posts, profileId, setShowEdit}) {
               alt={user.full_name} 
             />
           ) : (
-            <div className='w-full h-full rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center'>
+            <div className='w-full h-full rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center'>
               <span className='text-white text-4xl font-bold'>
                 {user.full_name?.charAt(0) || 'U'}
               </span>
@@ -43,7 +43,7 @@ function UserProfileInfo({user, posts, profileId, setShowEdit}) {
                   setShowEdit(true);
                   //console.log("Edit button clicked");
                 }} 
-                className='flex items-center gap-2 border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-lg font-medium transition-colors'
+                className='flex items-center gap-2 btn-secondary px-4 py-2 rounded-xl font-medium transition-colors'
               >
                 <PenBox className='w-4 h-4' />
                 Edit Profile
@@ -52,7 +52,7 @@ function UserProfileInfo({user, posts, profileId, setShowEdit}) {
           </div>
 
           {/* Bio */}
-          <p className='text-gray-700 text-sm max-w-md mt-4'>
+          <p className='text-gray-700 text-sm max-w-3xl mt-4 leading-relaxed'>
             {user.bio || 'No bio yet'}
           </p>
 
@@ -69,7 +69,7 @@ function UserProfileInfo({user, posts, profileId, setShowEdit}) {
           </div>
 
           {/* Stats */}
-          <div className='flex items-center gap-6 mt-6 border-t border-gray-200 pt-4'>
+          <div className='flex flex-wrap items-center gap-6 mt-6 border-t border-slate-200 pt-4'>
             <div>
               <span className='text-xl font-bold text-gray-900'>{posts.length}</span>
               <span className='text-sm text-gray-500 ml-1.5'>Posts</span>

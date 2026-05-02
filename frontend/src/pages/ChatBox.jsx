@@ -86,14 +86,14 @@ function ChatBox() {
   }, [connections, userId]);
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen bg-transparent">
       {/* Header - only show if user is loaded */}
       {user && (
-        <div className="flex items-center gap-2 p-2 md:px-10 xl:pl-42 bg-gradient-to-r from-indigo-50 to-purple-50 border-b border-gray-300">
+        <div className="flex items-center gap-3 p-3 md:px-10 xl:pl-42 bg-white/70 backdrop-blur border-b border-slate-200">
           {user.profile_picture ? (
-            <img src={user.profile_picture} alt="" />
+            <img src={user.profile_picture} alt="" className="w-10 h-10 rounded-full object-cover shadow-sm" />
           ) : (
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center">
               <span className="text-white text-sm font-semibold">
                 {user.full_name?.charAt(0) || "U"}
               </span>
@@ -123,10 +123,10 @@ function ChatBox() {
                     }`}
                   >
                     <div
-                      className={`p-2 text-sm max-w-sm rounded-lg shadow ${
+                      className={`p-2.5 text-sm max-w-sm rounded-xl shadow-sm ${
                         isOwnMessage
-                          ? "bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-br-none"
-                          : "bg-white text-slate-700 rounded-bl-none"
+                          ? "bg-gradient-to-br from-teal-500 to-cyan-600 text-white rounded-br-none"
+                          : "bg-white text-slate-700 rounded-bl-none subtle-border"
                       }`}
                     >
                       {message.message_type === "image" && (
@@ -152,10 +152,10 @@ function ChatBox() {
 
       {/* Input area */}
       <div className="px-4">
-        <div className="flex items-center gap-3 pl-5 p-1.5 bg-white w-full max-w-xl mx-auto border border-gray-300 shadow rounded-full mb-5">
+        <div className="flex items-center gap-3 pl-5 p-1.5 bg-white/95 w-full max-w-xl mx-auto border border-slate-200 shadow-sm rounded-full mb-5">
           <input
             type="text"
-            className="flex-1 outline-none text-slate-700"
+            className="flex-1 outline-none text-slate-700 bg-transparent"
             placeholder="Type a message..."
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             onChange={(e) => setText(e.target.value)}
@@ -170,7 +170,7 @@ function ChatBox() {
                 alt=""
               />
             ) : (
-              <ImageIcon className="size-7 text-gray-400 cursor-pointer" />
+              <ImageIcon className="size-7 text-slate-400 hover:text-slate-600 transition cursor-pointer" />
             )}
             <input
               type="file"
@@ -183,7 +183,7 @@ function ChatBox() {
 
           <button
             onClick={sendMessage}
-            className="bg-gradient-to-br from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 active:scale-95 cursor-pointer text-white p-2 rounded-full transition-all duration-300"
+            className="bg-gradient-to-br from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 active:scale-95 cursor-pointer text-white p-2 rounded-full transition-all duration-300"
           >
             <SendHorizonal size={18} />
           </button>

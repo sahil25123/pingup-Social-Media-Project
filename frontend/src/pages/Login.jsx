@@ -1,114 +1,94 @@
 import React from 'react'
 import { assets } from '../assets/assets.js'
-import { Star, Users, Sparkles, Globe2 } from 'lucide-react'
+import { ArrowRight, Globe2, ShieldCheck, Sparkles, Users2, Workflow } from 'lucide-react'
 import { SignIn } from '@clerk/clerk-react'
 
 function Login() {
   return (
-    <div className='min-h-screen relative overflow-hidden bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50'>
-      {/* Animated background elements */}
-      <div className='absolute inset-0 overflow-hidden'>
-        <div className='absolute top-20 left-10 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob'></div>
-        <div className='absolute top-40 right-10 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000'></div>
-        <div className='absolute bottom-20 left-1/2 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000'></div>
+    <div className='min-h-screen relative overflow-hidden bg-gradient-to-br from-teal-50 via-cyan-50 to-emerald-50'>
+      <div className='absolute inset-0 overflow-hidden pointer-events-none'>
+        <div className='absolute -top-16 left-8 w-80 h-80 bg-teal-300 rounded-full mix-blend-multiply blur-3xl opacity-30 animate-blob'></div>
+        <div className='absolute top-28 right-8 w-80 h-80 bg-cyan-300 rounded-full mix-blend-multiply blur-3xl opacity-25 animate-blob animation-delay-2000'></div>
+        <div className='absolute bottom-8 left-[35%] w-72 h-72 bg-emerald-300 rounded-full mix-blend-multiply blur-3xl opacity-25 animate-blob animation-delay-4000'></div>
       </div>
 
-      <div className='relative min-h-screen flex flex-col md:flex-row items-center justify-between gap-8 p-6 md:p-12 lg:px-20'>
-        {/* Left side - Hero Content */}
-        <div className='flex-1 max-w-2xl space-y-8 z-10'>
-          {/* Logo */}
-          <div className='flex items-center gap-3'>
-            <div className='w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg'>
+      <div className='relative min-h-screen max-w-7xl mx-auto grid lg:grid-cols-5 gap-8 items-center px-6 py-10 md:px-10'>
+        <div className='z-10 space-y-8 lg:col-span-3'>
+          <div className='inline-flex items-center gap-3 bg-white/80 border border-teal-100 rounded-2xl px-3 py-2 shadow-sm'>
+            <div className='w-11 h-11 bg-gradient-to-br from-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg'>
               <Sparkles className='w-6 h-6 text-white' />
             </div>
             <img src={assets.logo} className='h-8 object-contain' alt="PingUp" />
           </div>
 
-          {/* Main Heading */}
-          <div className='space-y-4'>
-            <div className='inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm border border-indigo-100'>
-              <Globe2 className='w-4 h-4 text-indigo-600' />
-              <span className='text-sm font-medium text-indigo-900'>Connect Globally</span>
+          <div className='space-y-5'>
+            <div className='inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-sm border border-teal-100 text-teal-700'>
+              <Globe2 className='w-4 h-4' />
+              <span className='text-sm font-semibold'>Network Without Limits</span>
             </div>
-            
-            <h1 className='text-5xl md:text-7xl font-bold leading-tight'>
-              <span className='bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 bg-clip-text text-transparent'>
-                More than friends,
+
+            <h1 className='text-4xl md:text-6xl font-bold leading-tight text-slate-900 max-w-2xl'>
+              Build your daily
+              <span className='block bg-gradient-to-r from-teal-600 via-cyan-600 to-emerald-600 bg-clip-text text-transparent'>
+                collaboration network
               </span>
-              <br />
-              <span className='text-gray-900'>truly connect</span>
             </h1>
-            
-            <p className='text-xl md:text-2xl text-gray-600 max-w-xl leading-relaxed'>
-              Join a vibrant global community where meaningful connections happen naturally.
+
+            <p className='text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed'>
+              One place to discover people, share ideas, and keep real-time conversations moving.
             </p>
           </div>
 
-          {/* Social Proof */}
-          <div className='flex flex-col sm:flex-row items-start sm:items-center gap-6'>
-            {/* Users */}
-            <div className='flex items-center gap-3 bg-white/80 backdrop-blur-sm px-5 py-3 rounded-2xl shadow-sm border border-indigo-100'>
-              <div className='flex -space-x-3'>
-                <div className='w-10 h-10 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full border-2 border-white'></div>
-                <div className='w-10 h-10 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full border-2 border-white'></div>
-                <div className='w-10 h-10 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full border-2 border-white'></div>
+          <div className='grid sm:grid-cols-3 gap-4'>
+            <div className='bg-white/85 backdrop-blur-sm border border-teal-100 rounded-2xl p-4 shadow-sm'>
+              <div className='flex items-center gap-3 mb-2 text-teal-700'>
+                <Users2 className='w-5 h-5' />
+                <span className='font-semibold'>Growing Community</span>
               </div>
-              <div>
-                <p className='text-2xl font-bold text-gray-900'>12k+</p>
-                <p className='text-sm text-gray-600'>Active Developers</p>
-              </div>
+              <p className='text-slate-600 text-sm'>Connect with creators, developers, and teams worldwide.</p>
             </div>
-
-            {/* Rating */}
-            <div className='bg-white/80 backdrop-blur-sm px-5 py-3 rounded-2xl shadow-sm border border-indigo-100'>
-              <div className='flex gap-1 mb-1'>
-                {Array(5).fill(0).map((_, i) => (
-                  <Star key={i} className='w-5 h-5 text-amber-400 fill-amber-400' />
-                ))}
+            <div className='bg-white/85 backdrop-blur-sm border border-cyan-100 rounded-2xl p-4 shadow-sm'>
+              <div className='flex items-center gap-3 mb-2 text-cyan-700'>
+                <ShieldCheck className='w-5 h-5' />
+                <span className='font-semibold'>Safe & Reliable</span>
               </div>
-              <p className='text-sm text-gray-600'>Rated 5.0 stars</p>
+              <p className='text-slate-600 text-sm'>Secure sign in and a smooth experience across every device.</p>
+            </div>
+            <div className='bg-white/85 backdrop-blur-sm border border-emerald-100 rounded-2xl p-4 shadow-sm'>
+              <div className='flex items-center gap-3 mb-2 text-emerald-700'>
+                <Workflow className='w-5 h-5' />
+                <span className='font-semibold'>Fast Workflow</span>
+              </div>
+              <p className='text-slate-600 text-sm'>Move from feed to messages and profile without friction.</p>
             </div>
           </div>
 
-          {/* Features */}
-          <div className='hidden md:grid grid-cols-2 gap-4 pt-4'>
-            <div className='flex items-start gap-3'>
-              <div className='w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0'>
-                <Users className='w-5 h-5 text-indigo-600' />
-              </div>
-              <div>
-                <h3 className='font-semibold text-gray-900'>Global Network</h3>
-                <p className='text-sm text-gray-600'>Connect with developers worldwide</p>
-              </div>
-            </div>
-            <div className='flex items-start gap-3'>
-              <div className='w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0'>
-                <Sparkles className='w-5 h-5 text-purple-600' />
-              </div>
-              <div>
-                <h3 className='font-semibold text-gray-900'>Real Connections</h3>
-                <p className='text-sm text-gray-600'>Build meaningful relationships</p>
-              </div>
-            </div>
+          <div className='inline-flex items-center gap-2 text-teal-700 font-semibold'>
+            <span>Sign in to continue</span>
+            <ArrowRight className='w-4 h-4' />
           </div>
         </div>
 
-        {/* Right side - SignIn Form */}
-        <div className=' flex justify-center flex-1 max-w-md w-full z-10'>
-          <div className='bg-white/90 backdrop-blur-xl  rounded-3xl shadow-2xl border border-white/20 p-8 md:p-10'>
-            <div className='mb-6'>
-              <h2 className='text-2xl font-bold text-gray-900 mb-2'>Welcome back</h2>
-              <p className='text-gray-600'>Sign in to continue your journey</p>
+        <div className='z-10 flex justify-center lg:justify-end lg:col-span-2'>
+          <div className='w-full max-w-md'>
+            <div className='mb-3 px-1'>
+              <p className='text-sm uppercase tracking-[0.22em] text-teal-700/85 font-semibold'>Account Access</p>
             </div>
-            <div className=' flex justify-center '>
+            <div className='w-full bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-6 md:p-8'>
+              <div className='mb-5'>
+              <h2 className='text-2xl font-bold text-slate-900 mb-1'>Welcome back</h2>
+              <p className='text-slate-600'>Sign in and pick up where you left off.</p>
+              </div>
+              <div className='flex justify-center'>
                 <SignIn />
-
+              </div>
             </div>
-            
+            <div className='mt-4 rounded-2xl border border-teal-100 bg-white/70 p-3 text-xs text-slate-600'>
+              By continuing, you agree to a secure and privacy-first sign-in experience.
+            </div>
           </div>
         </div>
       </div>
-      
     </div>
   )
 }

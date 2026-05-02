@@ -36,9 +36,9 @@ function Feed() {
   }, []);
 
   return !loading ? (
-    <div className="h-full overflow-y-scroll no-scrollbar py-10 xl:pr-5 flex items-start justify-center xl:gap-8">
+    <div className="h-full overflow-y-scroll no-scrollbar page-shell xl:pr-5 flex items-start justify-center xl:gap-8">
       {/* {Storied and the post list} */}
-      <div className="flex flex-col ">
+      <div className="flex flex-col gap-5">
         <StoryBar />
 
         {/* Posts */}
@@ -53,9 +53,9 @@ function Feed() {
                 </div>
               ))
             ) : (
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl shadow-sm border border-indigo-100/50 p-12 text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="w-10 h-10 text-indigo-600" />
+              <div className="section-card glass-surface p-12 text-center">
+                <div className="w-20 h-20 bg-gradient-to-br from-teal-100 to-cyan-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-10 h-10 text-teal-600" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">No posts yet</h3>
                 <p className="text-gray-500">Start connecting with others to see posts in your feed!</p>
@@ -65,7 +65,7 @@ function Feed() {
         </div>
       {/* Right sidebar */}
       <div className="max-xl:hidden sticky top-0">
-        <div className="max-w-xs bg-white text-xs p-4 rounded-md inline-flex flex-col gap-2 shadow">
+        <div className="max-w-xs section-card text-xs p-4 inline-flex flex-col gap-2">
           <h3 className="text-slate-800 font-semibold">Sponsored</h3>
           <img
             src={assets.sponsored_img}

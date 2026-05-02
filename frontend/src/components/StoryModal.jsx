@@ -183,7 +183,7 @@ const StoryModal = ({setShowModel, fetchStories}) => {
                         success: <p>Story Added</p>,
                         error: e => <p>{e.message}</p>
                     })} 
-                    className='flex items-center justify-center gap-2 text-white py-3 mt-4 w-full rounded bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 active:scale-95 transition cursor-pointer font-semibold'
+                    className='flex items-center justify-center gap-2 text-white py-3 mt-4 w-full rounded bg-gradient-to-r from-teal-500 to-cyan-600 hover:from-teal-600 hover:to-cyan-700 active:scale-95 transition cursor-pointer font-semibold'
                 >
                     <Sparkle size={18}/> Create Story
                 </button>

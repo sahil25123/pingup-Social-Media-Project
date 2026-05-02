@@ -1,7 +1,108 @@
 @import "tailwindcss";
 
-*{
+:root {
+  --app-bg: #f2f7f8;
+  --surface: #ffffff;
+  --surface-soft: #f4fbfc;
+  --border-soft: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --brand-primary: #0f766e;
+  --brand-secondary: #0891b2;
+  --brand-accent: #14b8a6;
+}
+
+* {
   font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  color: var(--text-primary);
+  background: radial-gradient(circle at 20% 0%, #dff7f5 0%, transparent 35%), var(--app-bg);
+}
+
+.page-shell {
+  min-height: 100%;
+  padding: 1.25rem;
+}
+
+.section-card {
+  background: color-mix(in srgb, var(--surface) 92%, #e6fffb 8%);
+  border: 1px solid color-mix(in srgb, var(--border-soft) 90%, #99f6e4 10%);
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.subtle-border {
+  border: 1px solid color-mix(in srgb, var(--border-soft) 88%, #cbd5e1 12%);
+}
+
+.glass-surface {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.app-title {
+  font-size: clamp(1.6rem, 1.25rem + 1vw, 2.15rem);
+  line-height: 1.2;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.app-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.input-shell {
+  width: 100%;
+  border-radius: 0.8rem;
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
+  padding: 0.72rem 0.95rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-shell:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--brand-primary) 45%, #99f6e4 55%);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+  color: #ffffff;
+  border-radius: 0.75rem;
+  transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 8px 18px rgba(8, 145, 178, 0.28);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  background: #f8fafc;
+  color: #1e293b;
+  border: 1px solid #dbe3ef;
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
 }

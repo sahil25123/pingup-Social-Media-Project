@@ -65,7 +65,7 @@ function Profile() {
 
   if (!user) {
     return (
-      <div className='h-full flex items-center justify-center bg-gray-50'>
+      <div className='h-full flex items-center justify-center'>
         <div className='text-center'>
           <p className='text-gray-600'>User not found</p>
         </div>
@@ -74,12 +74,11 @@ function Profile() {
   }
 
   return (
-    <div className='h-full relative overflow-y-scroll bg-gray-50 p-6'>
-      <div className='max-w-3xl mx-auto'>
-        {/* Profile card */}
-        <div className='bg-white rounded-2xl shadow overflow-hidden'>
+    <div className='h-full relative overflow-y-scroll page-shell'>
+      <div className='w-full space-y-6'>
+        <div className='section-card overflow-hidden'>
           {/* Cover Photo */}
-          <div className='h-40 md:h-56 bg-gradient-to-r from-indigo-200 via-purple-200 to-pink-200 relative'>
+          <div className='h-44 md:h-64 lg:h-72 bg-gradient-to-r from-teal-200 via-cyan-200 to-emerald-200 relative'>
             {user.cover_photo && (
               <img 
                 src={user.cover_photo} 
@@ -99,14 +98,13 @@ function Profile() {
           />
         </div>
 
-        {/* Tabs */}
-        <div className='mt-6'>
-          <div className='bg-white rounded-xl mx-auto max-w-md flex overflow-hidden shadow-sm'>
+        <div className='space-y-5'>
+          <div className='bg-white rounded-2xl w-full sm:w-fit flex overflow-hidden shadow-sm subtle-border'>
             {["posts", "media", "likes"].map((tab) => (
               <button
-                className={`flex-1 px-4 py-3 text-sm font-medium transition-all duration-200 ${
+                className={`flex-1 sm:flex-none sm:min-w-34 px-4 py-3 text-sm font-medium transition-all duration-200 ${
                   activeTab === tab 
-                    ? "bg-gradient-to-r from-indigo-600 to-purple-600 text-white" 
+                    ? "bg-gradient-to-r from-teal-600 to-cyan-600 text-white" 
                     : "text-gray-600 hover:bg-gray-50"
                 }`}
                 key={tab}
@@ -119,13 +117,13 @@ function Profile() {
 
           {/* Posts Tab */}
           {activeTab === "posts" && (
-            <div className='space-y-4 mt-6'>
+            <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
               {posts.length > 0 ? (
                 posts.map((post) => (
                   <PostCard key={post._id} post={post} />
                 ))
               ) : (
-                <div className='bg-white rounded-xl p-8 text-center shadow-sm'>
+                <div className='section-card p-8 text-center xl:col-span-2'>
                   <p className='text-gray-500'>No posts yet</p>
                 </div>
               )}
@@ -134,9 +132,9 @@ function Profile() {
 
           {/* Media Tab */}
           {activeTab === 'media' && (
-            <div className='mt-6'>
+            <div>
               {posts.filter((post) => post.image_urls?.length > 0).length > 0 ? (
-                <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
+                <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
                   {posts
                     .filter((post) => post.image_urls?.length > 0)
                     .map((post) => (
@@ -164,7 +162,7 @@ function Profile() {
                     ))}
                 </div>
               ) : (
-                <div className='bg-white rounded-xl p-8 text-center shadow-sm'>
+                <div className='section-card p-8 text-center'>
                   <p className='text-gray-500'>No media posts yet</p>
                 </div>
               )}
@@ -173,7 +171,7 @@ function Profile() {
 
           {/* Likes Tab */}
           {activeTab === 'likes' && (
-            <div className='space-y-4 mt-6'>
+            <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
               {posts.filter((post) => post.likes?.length > 0).length > 0 ? (
                 posts
                   .filter((post) => post.likes?.length > 0)
@@ -181,7 +179,7 @@ function Profile() {
                     <PostCard key={post._id} post={post} />
                   ))
               ) : (
-                <div className='bg-white rounded-xl p-8 text-center shadow-sm'>
+                <div className='section-card p-8 text-center xl:col-span-2'>
                   <p className='text-gray-500'>No liked posts yet</p>
                 </div>
               )}

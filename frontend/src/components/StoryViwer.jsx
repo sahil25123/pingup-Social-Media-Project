@@ -92,7 +92,7 @@ function StoryViwer({ viewStory, setViewStory }) {
             className='w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border border-white'
           />
         ) : (
-          <div className='w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center border border-white'>
+          <div className='w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center border border-white'>
             <span className='text-white text-xs font-semibold'>
               {viewStory.user?.full_name?.charAt(0) || 'U'}
             </span>
