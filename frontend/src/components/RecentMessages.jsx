@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import api from '../api/axios';
 import { useAuth, useUser } from '@clerk/clerk-react';
+import { MessageSquareText } from 'lucide-react';
 
 const RecentMessages = () => {
 
@@ -43,31 +44,38 @@ const RecentMessages = () => {
     useEffect(()=>{
         if(user){
             fetchRecentMessages();
-            setInterval(fetchRecentMessages, 30000);
-            return () => {clearInterval()};
+            const intervalId = setInterval(fetchRecentMessages, 30000);
+            return () => clearInterval(intervalId);
         }
     },[user]);
   return (
-    <div className='section-card max-w-xs mt-4 p-4 min-h-20 text-xs text-slate-800'>
-        <h3 className='font-semibold text-slate-800 mb-4'>Recent Messages</h3>
-        <div className='flex flex-col max-h-56 overflow-y-scroll no-scrollbar'>
-            {
-                msg.map((message, index) => (
-                    <Link to={`/messages/${message.from_user_id._id}`} key={index} className='flex items-start rounded-lg gap-2 py-2 hover:bg-slate-100 p-2 transition'>
-                        <img src={message.from_user_id.profile_picture} className='size-8 rounded-full aspect-square object-cover' alt="" />
-                        <div className='w-full'>
-                            <div className='flex justify-between'>
-                                <p className='font-medium'>{message.from_user_id.full_name}</p>
-                                <p className='text-[10px] text-slate-400'>{moment(message.createdAt).fromNow()}</p>
-                            </div>
-                            <div className='flex justify-between'>
-                                <p className='text-gray-500'>{message.text ? message.text : 'Media'}</p>
-                                { !message.seen && <p className='bg-teal-500 text-white w-4 h-4 flex items-center justify-center rounded-full text-[10px]'>1</p>}
-                            </div>
+    <div className='section-card p-4 text-xs text-slate-800'>
+        <div className='flex items-center justify-between mb-3'>
+            <h3 className='font-semibold text-slate-800'>Recent Messages</h3>
+            <span className='text-[11px] rounded-full px-2 py-0.5 bg-teal-50 text-teal-700 border border-teal-100'>{msg.length}</span>
+        </div>
+        <div className='flex flex-col max-h-64 overflow-y-auto no-scrollbar'>
+            {msg.length > 0 ? msg.map((message, index) => (
+                <Link to={`/messages/${message.from_user_id._id}`} key={index} className='flex items-start rounded-xl gap-2.5 py-2.5 hover:bg-slate-100 p-2 transition'>
+                    <img src={message.from_user_id.profile_picture} className='size-9 rounded-full aspect-square object-cover shadow-sm' alt="" />
+                    <div className='w-full min-w-0'>
+                        <div className='flex justify-between gap-2'>
+                            <p className='font-medium text-sm text-slate-800 truncate'>{message.from_user_id.full_name}</p>
+                            <p className='text-[10px] text-slate-400 whitespace-nowrap'>{moment(message.createdAt).fromNow()}</p>
                         </div>
-                    </Link>
-                ))
-            }
+                        <div className='flex justify-between items-center gap-2 mt-0.5'>
+                            <p className='text-slate-500 text-xs truncate'>{message.text ? message.text : 'Media'}</p>
+                            { !message.seen && <p className='bg-teal-500 text-white w-4 h-4 flex items-center justify-center rounded-full text-[10px]'>1</p>}
+                        </div>
+                    </div>
+                </Link>
+            )) : (
+                <div className='rounded-xl bg-slate-50 border border-slate-200 p-4 text-center'>
+                    <MessageSquareText className='w-5 h-5 text-slate-400 mx-auto mb-1.5' />
+                    <p className='text-slate-600 text-sm font-medium'>No recent messages</p>
+                    <p className='text-slate-500 text-xs mt-1'>Your latest conversations will show up here.</p>
+                </div>
+            )}
         </div>
     </div>
   )

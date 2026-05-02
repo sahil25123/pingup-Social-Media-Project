@@ -7,7 +7,7 @@ import RecentMessages from "../components/RecentMessages";
 import { useAuth } from "@clerk/clerk-react";
 import api from "../api/axios";
 import toast from "react-hot-toast";
-import { Zap } from "lucide-react";
+import { ArrowUpRight, Sparkles, Zap } from "lucide-react";
 
 function Feed() {
   const {getToken}  = useAuth()
@@ -64,22 +64,34 @@ function Feed() {
           </div>
         </div>
       {/* Right sidebar */}
-      <div className="max-xl:hidden sticky top-0">
-        <div className="max-w-xs section-card text-xs p-4 inline-flex flex-col gap-2">
-          <h3 className="text-slate-800 font-semibold">Sponsored</h3>
+      <aside className="max-xl:hidden sticky top-4 w-[21.5rem] space-y-4">
+        <div className="section-card p-4">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="text-slate-800 font-semibold">Sponsored</h3>
+            <span className="inline-flex items-center gap-1 text-[11px] text-cyan-700 bg-cyan-50 border border-cyan-100 rounded-full px-2 py-0.5">
+              <Sparkles className="w-3 h-3" />
+              Ad
+            </span>
+          </div>
           <img
             src={assets.sponsored_img}
             alt=""
-            className="w-75 h-50 rounded-md"
+            className="w-full h-52 object-cover rounded-xl subtle-border"
           />
-          <p className="text-slate-600">Email marketing</p>
-          <p className="text-slate-400">
+          <div className="mt-3">
+            <p className="text-slate-700 font-semibold text-lg">Email marketing</p>
+            <p className="text-slate-500 mt-1 text-[15px] leading-relaxed">
             Supercharge your marketing with a powerful, easy-to-use platform
             built for results.
-          </p>
+            </p>
+          </div>
+          <button className="mt-3 inline-flex items-center gap-1.5 text-sm text-teal-700 font-semibold hover:text-teal-800 transition cursor-pointer">
+            Learn more
+            <ArrowUpRight className="w-4 h-4" />
+          </button>
         </div>
         <RecentMessages/>
-      </div>
+      </aside>
     </div>
   ) : (
     <Loading />
