@@ -1,5 +1,4 @@
 import React from 'react'
-import { assets } from '../assets/assets.js'
 import { ArrowRight, Globe2, ShieldCheck, Sparkles, Users2, Workflow } from 'lucide-react'
 import { SignIn } from '@clerk/clerk-react'
 
@@ -18,7 +17,7 @@ function Login() {
             <div className='w-11 h-11 bg-gradient-to-br from-teal-600 to-cyan-600 rounded-2xl flex items-center justify-center shadow-lg'>
               <Sparkles className='w-6 h-6 text-white' />
             </div>
-            <img src={assets.logo} className='h-8 object-contain' alt="PingUp" />
+            <span className='brand-text-logo'>Cirqle</span>
           </div>
 
           <div className='space-y-5'>

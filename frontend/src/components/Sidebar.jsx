@@ -1,5 +1,4 @@
 import React from 'react'
-import { assets } from '../assets/assets'
 import { useNavigate, Link } from 'react-router-dom'
 import { useClerk, UserButton } from "@clerk/clerk-react"
 import MenuItems from './MenuItems'
@@ -27,13 +26,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               <Sparkles className='w-5 h-5 text-white' />
             </div>
             <div>
-              <img src={assets.logo} alt="" className='h-7 object-contain' />
+              <span className='brand-text-logo text-[1.55rem]'>Cirqle</span>
               <p className='text-[11px] text-slate-500 -mt-0.5'>Your social workspace</p>
             </div>
           </div>
         </div>
 
-        <div className='h-px bg-gradient-to-r from-transparent via-indigo-200 to-transparent mb-6'></div>
+        <div className='h-px bg-gradient-to-r from-transparent via-teal-200 to-transparent mb-6'></div>
 
         {/* Menu Items */}
         <MenuItems setSidebarOpen={setSidebarOpen} />
